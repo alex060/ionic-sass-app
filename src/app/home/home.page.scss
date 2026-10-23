@@ -1,0 +1,93 @@
+// =============================================================================
+// VARIABLES SASS (Tokens de diseño)
+// =============================================================================
+$title-color: #d32f2f;          // 4. Color rojo para el título
+$button-color: #1976d2;         // 5. Color azul para el botón
+$button-hover-color: #0d47a1;   // Azul oscuro para el estado :hover
+$image-border-color: #2e7d32;   // 6. Color verde para el borde de la imagen
+$border-thickness: 3px;         // 6. Grosor de borde de 3px
+$font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+// =============================================================================
+// MIXINS SASS (Reutilización de lógica de diseño y alineaciones)
+// =============================================================================
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// =============================================================================
+// REGLAS DEL COMPONENTE HOME (Uso de Anidamiento / Nesting Sass)
+// =============================================================================
+.home-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  font-family: $font-family-base;
+
+  // 4. Título en rojo, mayúsculas, centrado
+  .page-title {
+    color: $title-color;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-top: 12px;
+    margin-bottom: 28px;
+  }
+
+  // 5. Botón a la derecha en azul
+  .button-wrapper {
+    @include flex-end;
+    width: 100%;
+    margin-bottom: 32px;
+
+    .custom-btn {
+      // Propiedades CSS y variables Ionic CSS Shadow Parts
+      --background: #{$button-color};
+      --background-activated: #{$button-hover-color};
+      --background-focused: #{$button-hover-color};
+      --color: #ffffff;
+      font-weight: 600;
+      text-transform: none;
+      box-shadow: 0 4px 10px rgba(25, 118, 210, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(25, 118, 210, 0.45);
+      }
+    }
+  }
+
+  // 6. Imagen centrada con borde en verde de grosor 3px
+  .image-wrapper {
+    @include flex-center;
+    width: 100%;
+    margin-top: 20px;
+
+    .custom-image {
+      border: $border-thickness solid $image-border-color;
+      border-radius: 12px;
+      max-width: 100%;
+      width: 480px;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+}
